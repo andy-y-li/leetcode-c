@@ -49,7 +49,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = two_sum$(EXEEXT)
+bin_PROGRAMS = two_sum$(EXEEXT) removeDuplicate$(EXEEXT) sort$(EXEEXT) \
+	findLength$(EXEEXT)
 subdir = .
 DIST_COMMON = $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(srcdir)/config.h.in \
@@ -66,6 +67,15 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
+am_findLength_OBJECTS = findLength.$(OBJEXT)
+findLength_OBJECTS = $(am_findLength_OBJECTS)
+findLength_LDADD = $(LDADD)
+am_removeDuplicate_OBJECTS = removeDuplicate.$(OBJEXT)
+removeDuplicate_OBJECTS = $(am_removeDuplicate_OBJECTS)
+removeDuplicate_LDADD = $(LDADD)
+am_sort_OBJECTS = sort.$(OBJEXT)
+sort_OBJECTS = $(am_sort_OBJECTS)
+sort_LDADD = $(LDADD)
 am_two_sum_OBJECTS = sum.$(OBJEXT)
 two_sum_OBJECTS = $(am_two_sum_OBJECTS)
 two_sum_LDADD = $(LDADD)
@@ -77,8 +87,10 @@ COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 CCLD = $(CC)
 LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
-SOURCES = $(two_sum_SOURCES)
-DIST_SOURCES = $(two_sum_SOURCES)
+SOURCES = $(findLength_SOURCES) $(removeDuplicate_SOURCES) \
+	$(sort_SOURCES) $(two_sum_SOURCES)
+DIST_SOURCES = $(findLength_SOURCES) $(removeDuplicate_SOURCES) \
+	$(sort_SOURCES) $(two_sum_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -192,6 +204,9 @@ top_build_prefix = @top_build_prefix@
 top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 two_sum_SOURCES = src/sum.c
+removeDuplicate_SOURCES = src/removeDuplicate.c
+sort_SOURCES = src/sort.c
+findLength_SOURCES = src/findLength.c
 INCLUDES = -I $(top_srcdir)/src
 EXTRA_DIST = autogen.sh \
              README.md
@@ -290,6 +305,15 @@ uninstall-binPROGRAMS:
 
 clean-binPROGRAMS:
 	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+findLength$(EXEEXT): $(findLength_OBJECTS) $(findLength_DEPENDENCIES) $(EXTRA_findLength_DEPENDENCIES) 
+	@rm -f findLength$(EXEEXT)
+	$(LINK) $(findLength_OBJECTS) $(findLength_LDADD) $(LIBS)
+removeDuplicate$(EXEEXT): $(removeDuplicate_OBJECTS) $(removeDuplicate_DEPENDENCIES) $(EXTRA_removeDuplicate_DEPENDENCIES) 
+	@rm -f removeDuplicate$(EXEEXT)
+	$(LINK) $(removeDuplicate_OBJECTS) $(removeDuplicate_LDADD) $(LIBS)
+sort$(EXEEXT): $(sort_OBJECTS) $(sort_DEPENDENCIES) $(EXTRA_sort_DEPENDENCIES) 
+	@rm -f sort$(EXEEXT)
+	$(LINK) $(sort_OBJECTS) $(sort_LDADD) $(LIBS)
 two_sum$(EXEEXT): $(two_sum_OBJECTS) $(two_sum_DEPENDENCIES) $(EXTRA_two_sum_DEPENDENCIES) 
 	@rm -f two_sum$(EXEEXT)
 	$(LINK) $(two_sum_OBJECTS) $(two_sum_LDADD) $(LIBS)
@@ -300,6 +324,9 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/findLength.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/removeDuplicate.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sort.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/sum.Po@am__quote@
 
 .c.o:
@@ -315,6 +342,48 @@ distclean-compile:
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	source='$<' object='$@' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(COMPILE) -c `$(CYGPATH_W) '$<'`
+
+findLength.o: src/findLength.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT findLength.o -MD -MP -MF $(DEPDIR)/findLength.Tpo -c -o findLength.o `test -f 'src/findLength.c' || echo '$(srcdir)/'`src/findLength.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/findLength.Tpo $(DEPDIR)/findLength.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/findLength.c' object='findLength.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o findLength.o `test -f 'src/findLength.c' || echo '$(srcdir)/'`src/findLength.c
+
+findLength.obj: src/findLength.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT findLength.obj -MD -MP -MF $(DEPDIR)/findLength.Tpo -c -o findLength.obj `if test -f 'src/findLength.c'; then $(CYGPATH_W) 'src/findLength.c'; else $(CYGPATH_W) '$(srcdir)/src/findLength.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/findLength.Tpo $(DEPDIR)/findLength.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/findLength.c' object='findLength.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o findLength.obj `if test -f 'src/findLength.c'; then $(CYGPATH_W) 'src/findLength.c'; else $(CYGPATH_W) '$(srcdir)/src/findLength.c'; fi`
+
+removeDuplicate.o: src/removeDuplicate.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT removeDuplicate.o -MD -MP -MF $(DEPDIR)/removeDuplicate.Tpo -c -o removeDuplicate.o `test -f 'src/removeDuplicate.c' || echo '$(srcdir)/'`src/removeDuplicate.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/removeDuplicate.Tpo $(DEPDIR)/removeDuplicate.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/removeDuplicate.c' object='removeDuplicate.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o removeDuplicate.o `test -f 'src/removeDuplicate.c' || echo '$(srcdir)/'`src/removeDuplicate.c
+
+removeDuplicate.obj: src/removeDuplicate.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT removeDuplicate.obj -MD -MP -MF $(DEPDIR)/removeDuplicate.Tpo -c -o removeDuplicate.obj `if test -f 'src/removeDuplicate.c'; then $(CYGPATH_W) 'src/removeDuplicate.c'; else $(CYGPATH_W) '$(srcdir)/src/removeDuplicate.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/removeDuplicate.Tpo $(DEPDIR)/removeDuplicate.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/removeDuplicate.c' object='removeDuplicate.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o removeDuplicate.obj `if test -f 'src/removeDuplicate.c'; then $(CYGPATH_W) 'src/removeDuplicate.c'; else $(CYGPATH_W) '$(srcdir)/src/removeDuplicate.c'; fi`
+
+sort.o: src/sort.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sort.o -MD -MP -MF $(DEPDIR)/sort.Tpo -c -o sort.o `test -f 'src/sort.c' || echo '$(srcdir)/'`src/sort.c
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/sort.Tpo $(DEPDIR)/sort.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/sort.c' object='sort.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sort.o `test -f 'src/sort.c' || echo '$(srcdir)/'`src/sort.c
+
+sort.obj: src/sort.c
+@am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sort.obj -MD -MP -MF $(DEPDIR)/sort.Tpo -c -o sort.obj `if test -f 'src/sort.c'; then $(CYGPATH_W) 'src/sort.c'; else $(CYGPATH_W) '$(srcdir)/src/sort.c'; fi`
+@am__fastdepCC_TRUE@	$(am__mv) $(DEPDIR)/sort.Tpo $(DEPDIR)/sort.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	source='src/sort.c' object='sort.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -c -o sort.obj `if test -f 'src/sort.c'; then $(CYGPATH_W) 'src/sort.c'; else $(CYGPATH_W) '$(srcdir)/src/sort.c'; fi`
 
 sum.o: src/sum.c
 @am__fastdepCC_TRUE@	$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS) -MT sum.o -MD -MP -MF $(DEPDIR)/sum.Tpo -c -o sum.o `test -f 'src/sum.c' || echo '$(srcdir)/'`src/sum.c
