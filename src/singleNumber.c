@@ -24,7 +24,7 @@
  */
 
 int isInArray(int v, int *nums, int size) {
-   printf("find %d ,size: %d\n", v, size);
+   //printf("find %d ,size: %d\n", v, size);
    for (int idx = 0; idx < size; idx++) {
         if (v == nums[idx]) {
             return 1;
@@ -35,10 +35,10 @@ int isInArray(int v, int *nums, int size) {
 
 int singleNumber(int* nums, int numsSize) {
     for (int i = 0; i < numsSize; i++) {
-       if (isInArray(nums[i], nums + (i + 1) * sizeof(int), numsSize - (i + 1))) {
+       if (isInArray(nums[i], nums + (i + 1), numsSize - (i + 1))) {
            continue;
        }
-       if (isInArray(nums[i], nums, i)) {
+       else if (isInArray(nums[i], nums, i)) {
            continue;
        }
        return nums[i];
