@@ -1,5 +1,5 @@
 Makefile.in
-autom4te.cache/requests
+autom4te.cache/
 .deps/
 Makefile
 config.*
