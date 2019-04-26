@@ -46,6 +46,14 @@ int singleNumber(int* nums, int numsSize) {
    return -1; 
 }
 
+int singleNumber1(int* nums, int numsSize) {
+    int result = 0;
+    for (int i = 0; i < numsSize; i++) {
+        result ^= nums[i];
+    }
+    return result;
+}
+
 int main()
 {
     int nums[] = {4,1,2,1,2,4,3,5,5};
@@ -53,5 +61,9 @@ int main()
     int n = singleNumber(nums, sizeof(nums)/sizeof(int));
 
     printf("n = %d\n", n);
+
+    int v = singleNumber1(nums, sizeof(nums)/sizeof(int));
+    printf("v = %d\n", v);
+
     return 0;
 }

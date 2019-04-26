@@ -19,11 +19,26 @@
 
 #include <stdio.h>
 
-int removeDuplicate(int *num, int numsSize) {
+void show(int *num, int numsSize) {
+    for (int i = 0; i < numsSize; i++) {
+        printf("%d ", num[i]);
+    }
+    printf("\n");
+}
 
+int removeDuplicate(int *num, int numsSize) {
+    for (int index = 0; index < numsSize - 1; index++) {
+        for (int j = index + 1; j < numsSize; j++) {
+            if (num[index] == num[j]){
+                index = j;
+            }
+        }
+    }   
 }
 
 int main() {
-
+    int a[] = {0,0,1,1,2,3,3,4,4,5};
+    int len = removeDuplicate(a, sizeof(a)/ sizeof(int));
+    show(a, len);
     return 0;
 }
