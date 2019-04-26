@@ -1,3 +1,11 @@
+Makefile.in
+autom4te.cache/requests
+.deps/
+Makefile
+config.*
+config.log
+stamp-h1
+
 # Prerequisites
 *.d
 
