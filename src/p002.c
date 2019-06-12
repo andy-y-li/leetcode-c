@@ -82,12 +82,9 @@ void release(ListNode *L)
 ListNode* addTwoNumbers(ListNode* L1, ListNode* L2){
     ListNode *p = (ListNode *)malloc(sizeof(ListNode));
     
-    int len1 = length(L1);
-    int len2 = length(L2);
-
     bool firstNode = true;
     int plus = 0;
-    for (int i = 0; i < (len1 <len2?len2:len1);i++) {
+    for (; L1 || L2;) {
         if (firstNode) {
             int v1 = L1->val;
             int v2 = L2->val;
