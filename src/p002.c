@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <stdbool.h>
 
 /**
  * Definition for singly-linked list.
@@ -69,26 +70,55 @@ int length(ListNode *L)
     return len;
 }
 
+void release(ListNode *L)
+{
+    do {
+        ListNode *p = L->next;
+        free(L);
+        L = p;
+    } while (L);
+}
+
 ListNode* addTwoNumbers(ListNode* L1, ListNode* L2){
-    int v1 = getValue(L1);
-    int v2 = getValue(L2);
-
-    int sum = v1 + v2;
-
     ListNode *p = (ListNode *)malloc(sizeof(ListNode));
-    p->val = sum % 10;
-    p->next = NULL;
-    sum = sum / 10;
+    
+    int len1 = length(L1);
+    int len2 = length(L2);
 
-    if (sum) {
-        for (;sum / 10;) {
+    bool firstNode = true;
+    int plus = 0;
+    for (int i = 0; i < (len1 <len2?len2:len1);i++) {
+        if (firstNode) {
+            int v1 = L1->val;
+            int v2 = L2->val;
+            int sum = v1 + v2;
+            plus = (sum > 9?1:0);
+
+            p->val = sum % 10;
+            p->next = NULL;
+            L1 = L1->next;
+            L2 = L2->next;
+            firstNode = false;
+            continue;
+        } else {
+            if (L1 == NULL && L2 == NULL) {
+                break;
+            }
+            int v1 = L1?L1->val:0;
+            int v2 = L2?L2->val:0;
+            int sum = v1 + v2 + plus;
+            plus = (sum > 9?1:0);
+
             addNode(p, sum % 10);
-            sum = sum / 10;
+            L1 = L1?L1->next:NULL;
+            L2 = L2?L2->next:NULL;
         }
-        addNode(p, sum % 10);
-    }
 
-    return p;
+    }
+    if (plus) {
+        addNode(p, plus);
+    }
+   return p;
 }
 
 int main()
@@ -113,5 +143,9 @@ int main()
 
     int sum = getValue(p);
     printf("v1 = %d, v2 = %d, sum = %d\n", v1, v2, sum);
+
+    release(L1);
+    release(L2);
+    release(p);
     return 0;
 }
