@@ -8,7 +8,7 @@ findLength_SOURCES = src/findLength.c
 singleNumber_SOURCES = src/singleNumber.c
 select_SOURCES = src/selectionSort.c
 fe_SOURCES = src/findElement.c
-p002_SOURCES = src/p002.c
+p002_SOURCES = src/list.h src/list.c src/p002.c
 
 INCLUDES = -I $(top_srcdir)/src
 CFLAGS = -g -O2 -Wall
