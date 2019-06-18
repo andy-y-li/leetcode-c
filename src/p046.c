@@ -26,7 +26,7 @@ void swap(int *a, int *b)
     *b = tmp;
 }
 
-void dfs(int *nums, int size, int start, int *count, int **results)
+void backTrack(int *nums, int size, int start, int *count, int **results)
 {
     int i;
     if (start == size) {
@@ -36,7 +36,7 @@ void dfs(int *nums, int size, int start, int *count, int **results)
     } else {
         for (i = start; i < size; i++) {
             swap(nums + start, nums + i);
-            dfs(nums, size, start + 1, count, results);
+            backTrack(nums, size, start + 1, count, results);
             swap(nums + start, nums + i);
         }
     }
@@ -51,7 +51,7 @@ int **permute(int* nums, int numsSize, int* returnSize, int** returnColumnSizes)
     int cap = 5000;
     int **results = (int **)malloc(cap * sizeof(int *));
     *returnSize = 0;
-    dfs(nums, numsSize, 0, returnSize, results);
+    backTrack(nums, numsSize, 0, returnSize, results);
     return results;
 }
 

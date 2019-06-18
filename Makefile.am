@@ -1,6 +1,6 @@
 bin_PROGRAMS = two_sum removeDuplicate sort findLength singleNumber select \
 			   fe p002 p067 p067_v1 p415 p046 p050 p007 p038 p038_v1 p038_v2 p443 \
-			   p009 p008
+			   p009 p008 p028
 
 two_sum_SOURCES = src/sum.c
 removeDuplicate_SOURCES = src/removeDuplicate.c
@@ -22,6 +22,7 @@ p038_v2_SOURCES = src/p038_v2.c
 p443_SOURCES = src/p443.c
 p009_SOURCES = src/p009.c
 p008_SOURCES = src/p008.c
+p028_SOURCES = src/p028.c
 
 INCLUDES = -I $(top_srcdir)/src
 CFLAGS = -g -O2 -Wall
