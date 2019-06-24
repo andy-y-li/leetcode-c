@@ -5,6 +5,7 @@ Makefile
 config.*
 config.log
 stamp-h1
+tags
 
 # Prerequisites
 *.d
