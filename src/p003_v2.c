@@ -16,10 +16,11 @@
  * =====================================================================================
  */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
-int lengthOfLongestSubstring(char *s) {
+char *getLengthOfLongestSubstring(char *s) {
     int len = strlen(s);
     if (len == 0) {
         return 0;
@@ -39,7 +40,9 @@ int lengthOfLongestSubstring(char *s) {
     }
     int result = lastend + 1;
     if (i == len) {
-        return result;
+        char *str = (char *)malloc(sizeof(char) * (len + 1));
+        strncpy(str, s, len);
+        return str;
     }
     for (i = 1; i < len; i++) {
         used[s[i-1]] = false;
@@ -59,18 +62,22 @@ int lengthOfLongestSubstring(char *s) {
             result = lastend - i + 1;
         }
         if (result >= len - i - 1) {
-            return result;
+            break;
         }
     }
-    return result;
+
+    char *str = (char *)malloc(sizeof(char) * (result+ 1));
+    strncpy(str, s+i,result);
+    return str;
 
 }
 
 int main()
 {
     char s[] = "adkdfgt";
-    int l = lengthOfLongestSubstring(s);
-    printf("max len:%d\n",l);
+    char *str = getLengthOfLongestSubstring(s);
+    printf("sub max string::%s\n",str);
+    free(str);
     return 0;
 }
 
